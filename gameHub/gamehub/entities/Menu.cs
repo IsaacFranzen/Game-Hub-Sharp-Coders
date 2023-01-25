@@ -37,7 +37,8 @@ namespace gamehub.entities
                         jogador.registrarJogador();
                         break;
                     case 2:
-
+                        Login fazerLogin = new Login();
+                        fazerLogin.fazerLogin();
                         break;
                     case 3:
 
