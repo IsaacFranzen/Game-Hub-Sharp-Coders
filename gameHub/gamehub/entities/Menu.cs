@@ -12,11 +12,12 @@ namespace gamehub.entities
 
         public Menu()
         {
-            exibirMenu();
+            exibirMenu();          
         }
-
+        
         public void exibirMenu()
         {
+            Jogador jogador = new Jogador();
             while (true)
             {
                 Console.WriteLine("1 - Registrar jogador");
@@ -33,12 +34,18 @@ namespace gamehub.entities
                 switch (Option)
                 {
                     case 1:
-                        Jogador jogador = new Jogador();
                         jogador.registrarJogador();
                         break;
                     case 2:
-                        Login fazerLogin = new Login();
-                        fazerLogin.fazerLogin();
+                        if(jogador.Logado != true)
+                        {
+                            jogador.fazerLogin();
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Você já está logado, faça o logout para logar em outra conta");
+                        }
+                        
                         break;
                     case 3:
 
