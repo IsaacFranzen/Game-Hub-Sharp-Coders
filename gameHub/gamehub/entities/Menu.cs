@@ -20,16 +20,16 @@ namespace gamehub.entities
             Jogador jogador = new Jogador();
             while (true)
             {
+                
                 Console.WriteLine("1 - Registrar jogador");
                 Console.WriteLine("2 - Fazer login");
-                Console.WriteLine("3 - Mostrar jogadores");
+                Console.WriteLine("3 - Salvar jogadores");
                 Console.WriteLine("4 - Logout");
                 Console.WriteLine("5 - Sair");
 
                 Console.WriteLine("Digite a opção escolhida");
 
                 Option = int.Parse(Console.ReadLine());
-
                 switch (Option)
                 {
                     case 1:
@@ -46,7 +46,7 @@ namespace gamehub.entities
                         }                       
                         break;
                     case 3:
-                       jogador.salvarJogadores();
+                        jogador.salvarJogadores();
                         break;                 
                     case 4:
 
