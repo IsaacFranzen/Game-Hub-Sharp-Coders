@@ -45,6 +45,8 @@ namespace gamehub.entities
 
         public void fazerLogin()
         {
+            if (jogadores.Count != 0 )
+            {
             Console.Write("Digite seu nome:");
             string nomeDigitado = Console.ReadLine();
 
@@ -63,6 +65,13 @@ namespace gamehub.entities
             if (!Logado)
             {
                 Console.WriteLine("Login ou senha inválidos, tente novamente.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("");
+                Console.WriteLine("Registre ao menos um usuário para fazer o login.");
+                Console.WriteLine("");
             }
         }
 

@@ -18,16 +18,35 @@ namespace gamehub.entities
         public void exibirMenu()
         {
             Jogador jogador = new Jogador();
+            
             while (true)
             {
-                
-                Console.WriteLine("1 - Registrar jogador");
-                Console.WriteLine("2 - Fazer login");
-                Console.WriteLine("3 - Salvar jogadores");
-                Console.WriteLine("4 - Logout");
-                Console.WriteLine("5 - Sair");
-
-                Console.WriteLine("Digite a opção escolhida");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.Write("BEM-VINDO AO HUB DE GAMES!\n" +
+                              "##########################\n" +
+                              "# 1 - Registrar jogador. #\n" +
+                              "# 2 - Fazer login.       #\n" +
+                              "# 3 - Salvar jogadores.  #\n" +
+                              "# 4 - Lista de jogadores.#\n" +
+                              "# 5 - Logout.            #\n" +
+                              "# 6 - Sair do hub        #\n" +
+                              "##########################");
+                Console.ResetColor();
+                Console.WriteLine("");
+                if (jogador.Logado == false)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("OBS** Para exibir os jogos\ndisponiveis faça o login.");
+                    Console.ResetColor();
+                }
+                if (jogador.Logado == true)
+                {
+                    Console.Write("Escolha o jogo para jogar");
+                    Console.Write("7 - Jogar jogo da velha");
+                }
+                Console.WriteLine("");
+                Console.WriteLine("");
+                Console.Write("Digite a opção escolhida: ");
 
                 Option = int.Parse(Console.ReadLine());
                 switch (Option)
@@ -52,6 +71,8 @@ namespace gamehub.entities
 
                         break;
                     case 5:
+                        break;
+                    case 6:
                         Console.WriteLine("Encerrando menu.");
                         Environment.Exit(0);
                         break;
