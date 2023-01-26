@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text.Json.Serialization;
 
 namespace gamehub.entities
 {
@@ -78,30 +79,20 @@ namespace gamehub.entities
         public void salvarJogadores()
         {
             string roothPath = @"C:\Users\isaac\OneDrive\Área de Trabalho\gameHub\gameHub\gamehub\data\";
-            string filePath = roothPath + "jogadores.JSON";
+            string filePath = roothPath + "jogadores.json";
+            Console.WriteLine(filePath);
 
             if (!File.Exists(filePath))
             {
                 File.Create(filePath).Close();
             }
-            string json = JsonSerializer.Serialize(jogadores);
-            File.AppendAllText(filePath, json);
-            
-        }
-
-        public void mostrarJogadores()
-        {
-            List<Jogador> jogadores = null;
-
-            StreamReader stream = new StreamReader(@"C:\Users\isaac\OneDrive\Área de Trabalho\gameHub\gameHub\gamehub\data\jogadores.json");
-            string jsonString = stream.ReadToEnd();
-            jogadores = JsonSerializer.Deserialize<List<Jogador>>(jsonString);
-
-            foreach (Jogador jogador in jogadores)
+            for(int i = 0; i < jogadores.Count; i++)
             {
-                Console.WriteLine(jogador.Nome);
+                string json = JsonSerializer.Serialize(jogadores[i]);
+                File.AppendAllText(filePath, json);
             }
-
+           
+            
         }
     }
 }

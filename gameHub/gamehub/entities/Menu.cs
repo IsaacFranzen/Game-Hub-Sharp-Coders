@@ -23,7 +23,7 @@ namespace gamehub.entities
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.Write("BEM-VINDO AO HUB DE GAMES!\n" +
-                              "##########################\n" +
+                              "#########################\n" +
                               "# 1 - Registrar jogador. #\n" +
                               "# 2 - Fazer login.       #\n" +
                               "# 3 - Salvar jogadores.  #\n" +
@@ -68,7 +68,6 @@ namespace gamehub.entities
                         jogador.salvarJogadores();
                         break;                 
                     case 4:
-
                         break;
                     case 5:
                         break;
