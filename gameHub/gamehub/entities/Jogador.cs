@@ -39,6 +39,7 @@ namespace gamehub.entities
                 };
 
                 jogadores.Add(jogador);
+                salvarJogadores();
                 
             
         }

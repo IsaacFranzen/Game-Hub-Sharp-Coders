@@ -23,9 +23,8 @@ namespace gamehub.entities
                 Console.WriteLine("1 - Registrar jogador");
                 Console.WriteLine("2 - Fazer login");
                 Console.WriteLine("3 - Mostrar jogadores");
-                Console.WriteLine("4 - Salvar jogadores");
-                Console.WriteLine("5 - Logout");
-                Console.WriteLine("6 - Sair");
+                Console.WriteLine("4 - Logout");
+                Console.WriteLine("5 - Sair");
 
                 Console.WriteLine("Digite a opção escolhida");
 
@@ -44,21 +43,14 @@ namespace gamehub.entities
                         else
                         {
                             Console.WriteLine($"Você já está logado, faça o logout para logar em outra conta");
-                        }
-                        
+                        }                       
                         break;
                     case 3:
-
-                        break;
+                        break;                 
                     case 4:
-                        jogador.salvarJogadores();
-                        Console.WriteLine("Jogador salvo com sucesso!");
+
                         break;
                     case 5:
-
-                        break;
-
-                    case 6:
                         Console.WriteLine("Encerrando menu.");
                         Environment.Exit(0);
                         break;
