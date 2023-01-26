@@ -33,7 +33,7 @@ namespace gamehub.entities
                 switch (Option)
                 {
                     case 1:
-                        jogador.registrarJogador();
+                        jogador.registrarJogador();                      
                         break;
                     case 2:
                         if(jogador.Logado != true)
@@ -46,6 +46,7 @@ namespace gamehub.entities
                         }                       
                         break;
                     case 3:
+                       jogador.salvarJogadores();
                         break;                 
                     case 4:
 

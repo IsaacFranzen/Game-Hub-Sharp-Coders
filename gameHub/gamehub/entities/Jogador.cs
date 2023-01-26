@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace gamehub.entities
 {
@@ -15,14 +17,14 @@ namespace gamehub.entities
         public bool Logado { get; set; }
 
         public List<Jogador> jogadores = new List<Jogador>();
+        
 
         public Jogador() 
         {
         }
 
         public void registrarJogador()
-        {
-            
+        {          
                 Console.Write("Digite o seu nome: ");
                 string nome = Console.ReadLine();
 
@@ -38,10 +40,7 @@ namespace gamehub.entities
                     Logado = false
                 };
 
-                jogadores.Add(jogador);
-                salvarJogadores();
-                
-            
+                jogadores.Add(jogador);   
         }
 
         public void fazerLogin()
@@ -69,7 +68,7 @@ namespace gamehub.entities
 
         public void salvarJogadores()
         {
-            string roothPath = @"C:\Users\isaac\OneDrive\Área de Trabalho\gameHub\gameHub\gamehub\";
+            string roothPath = @"C:\Users\isaac\OneDrive\Área de Trabalho\gameHub\gameHub\gamehub\data\";
             string filePath = roothPath + "jogadores.JSON";
 
             if (!File.Exists(filePath))
@@ -77,7 +76,23 @@ namespace gamehub.entities
                 File.Create(filePath).Close();
             }
             string json = JsonSerializer.Serialize(jogadores);
-            File.WriteAllText(filePath, json);
+            File.AppendAllText(filePath, json);
+            
+        }
+
+        public void mostrarJogadores()
+        {
+            List<Jogador> jogadores = null;
+
+            StreamReader stream = new StreamReader(@"C:\Users\isaac\OneDrive\Área de Trabalho\gameHub\gameHub\gamehub\data\jogadores.json");
+            string jsonString = stream.ReadToEnd();
+            jogadores = JsonSerializer.Deserialize<List<Jogador>>(jsonString);
+
+            foreach (Jogador jogador in jogadores)
+            {
+                Console.WriteLine(jogador.Nome);
+            }
+
         }
     }
 }
