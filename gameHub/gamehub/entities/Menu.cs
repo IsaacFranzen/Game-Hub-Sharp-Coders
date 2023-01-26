@@ -51,7 +51,8 @@ namespace gamehub.entities
 
                         break;
                     case 4:
-
+                        jogador.salvarJogadores();
+                        Console.WriteLine("Jogador salvo com sucesso!");
                         break;
                     case 5:
 
