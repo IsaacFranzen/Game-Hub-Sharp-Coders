@@ -1,4 +1,5 @@
-﻿using System;
+﻿using gamehub.entities.JogoDaVelha;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,9 @@ namespace gamehub.entities
     public class Menu
     {
         public int Option { get; set; }
+        public int teste { get; set; }
+        public bool teste1 { get; set; }
         
-
         public Menu()
         {
             exibirMenu();
@@ -19,9 +21,11 @@ namespace gamehub.entities
         
         public void exibirMenu()
         {
+            teste1 = true;
             Jogador jogador = new Jogador();
+            TabuleiroVelha tabuleiroVelha = new TabuleiroVelha(); 
             jogador.lerJogadoresJson(jogador.jogadores);
-            while (true)
+            while (teste1)
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.Write("BEM-VINDO AO HUB DE GAMES!\n" +
@@ -85,6 +89,19 @@ namespace gamehub.entities
                     case 6:
                         Console.WriteLine("Encerrando menu.");
                         Environment.Exit(0);
+                        break;
+                    case 7:
+                            if(teste < 3)
+                        {
+                            Console.Clear();
+                            tabuleiroVelha.mostrarTabuleiro();
+                            teste1 = false;
+                        }
+                            
+                            teste++;
+                            
+                        
+                        
                         break;
                     default:
                         Console.WriteLine("Opção inválida, tente novamente.");
