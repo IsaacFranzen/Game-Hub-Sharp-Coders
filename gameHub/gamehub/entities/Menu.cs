@@ -4,28 +4,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using gamehub.entities.JogoDaVelha;
 namespace gamehub.entities
 {
     public class Menu
     {
         public int Option { get; set; }
-        public int teste { get; set; }
-        public bool teste1 { get; set; }
         
         public Menu()
         {
-            exibirMenu();
-            
+                     
         }
         
         public void exibirMenu()
-        {
-            teste1 = true;
+        {            
             Jogador jogador = new Jogador();
-            TabuleiroVelha tabuleiroVelha = new TabuleiroVelha(); 
-            jogador.lerJogadoresJson(jogador.jogadores);
-            while (teste1)
+           JogoDaVelha.JogoDaVelha incio = new JogoDaVelha.JogoDaVelha();
+                 
+
+            jogador.LerJogadoresJson(jogador.jogadores);
+            bool loopMenu = true;
+
+            while (loopMenu)
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.Write("BEM-VINDO AO HUB DE GAMES!\n" +
@@ -66,7 +66,7 @@ namespace gamehub.entities
                 switch (Option)
                 {
                     case 1:
-                        jogador.registrarJogador(jogador.jogadores);                      
+                        jogador.RegistrarJogador(jogador.jogadores);                      
                         break;
                     case 2:
                         if(jogador.Logado != true)
@@ -82,7 +82,8 @@ namespace gamehub.entities
                         Console.WriteLine(jogador.jogadores.Count());
                         break;                 
                     case 4:
-                        jogador.listarJogadores(jogador.jogadores);
+                        jogador.ListarJogadores(jogador.jogadores);
+
                         break;
                     case 5:
                         break;
@@ -91,17 +92,7 @@ namespace gamehub.entities
                         Environment.Exit(0);
                         break;
                     case 7:
-                            if(teste < 3)
-                        {
-                            Console.Clear();
-                            tabuleiroVelha.mostrarTabuleiro();
-                            teste1 = false;
-                        }
-                            
-                            teste++;
-                            
-                        
-                        
+                        incio.MostrarTabuleiro();
                         break;
                     default:
                         Console.WriteLine("Opção inválida, tente novamente.");
