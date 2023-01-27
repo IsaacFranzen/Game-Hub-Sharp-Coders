@@ -16,16 +16,14 @@ namespace gamehub.entities
         public string? Senha { get; set; }
         public int Pontuacao { get; set; }
         public bool Logado { get; set; }
-
         public List<Jogador> jogadores = new List<Jogador>();
-        
-
+       
         public Jogador() 
         {
         }
 
-        public void registrarJogador()
-        {          
+        public void registrarJogador(List<Jogador>jogadores)
+        {            
                 Console.Write("Digite o seu nome: ");
                 string nome = Console.ReadLine();
 
@@ -36,12 +34,31 @@ namespace gamehub.entities
                 Jogador jogador = new Jogador
                 {
                     Nome = nome,
-                    Pontuacao = 0,
                     Senha = senha,
                     Logado = false
                 };
 
-                jogadores.Add(jogador);   
+                jogadores.Add(jogador);
+
+            string roothPath = @"C:\Users\isaac\OneDrive\Área de Trabalho\gameHub\gameHub\gamehub\";
+            string filePath = roothPath + "jogadores.json";
+            if (!File.Exists(filePath))
+            {
+                File.Create(filePath).Close();
+            }
+
+            string jsonString = JsonSerializer.Serialize(jogadores);
+            File.WriteAllText(filePath, jsonString);           
+        }
+
+        public void lerJogadoresJson(List<Jogador> jogadores)
+        {
+            string jsonJogadores = File.ReadAllText(@"C:\Users\isaac\OneDrive\Área de Trabalho\gameHub\gameHub\gamehub\jogadores.json");
+            if (!String.IsNullOrEmpty(jsonJogadores))
+            {
+                List<Jogador> todosOsJogadores = JsonSerializer.Deserialize<List<Jogador>>(jsonJogadores);
+                todosOsJogadores.ForEach(jogador => jogadores.Add(jogador));
+            }
         }
 
         public void fazerLogin()
@@ -74,25 +91,6 @@ namespace gamehub.entities
                 Console.WriteLine("Registre ao menos um usuário para fazer o login.");
                 Console.WriteLine("");
             }
-        }
-
-        public void salvarJogadores()
-        {
-            string roothPath = @"C:\Users\isaac\OneDrive\Área de Trabalho\gameHub\gameHub\gamehub\data\";
-            string filePath = roothPath + "jogadores.json";
-            Console.WriteLine(filePath);
-
-            if (!File.Exists(filePath))
-            {
-                File.Create(filePath).Close();
-            }
-            for(int i = 0; i < jogadores.Count; i++)
-            {
-                string json = JsonSerializer.Serialize(jogadores[i]);
-                File.AppendAllText(filePath, json);
-            }
-           
-            
-        }
+        }      
     }
 }

@@ -9,21 +9,23 @@ namespace gamehub.entities
     public class Menu
     {
         public int Option { get; set; }
+        
 
         public Menu()
         {
-            exibirMenu();          
+            exibirMenu();
+            
         }
         
         public void exibirMenu()
         {
             Jogador jogador = new Jogador();
-            
+            jogador.lerJogadoresJson(jogador.jogadores);
             while (true)
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.Write("BEM-VINDO AO HUB DE GAMES!\n" +
-                              "#########################\n" +
+                              "##########################\n" +
                               "# 1 - Registrar jogador. #\n" +
                               "# 2 - Fazer login.       #\n" +
                               "# 3 - Salvar jogadores.  #\n" +
@@ -49,10 +51,11 @@ namespace gamehub.entities
                 Console.Write("Digite a opção escolhida: ");
 
                 Option = int.Parse(Console.ReadLine());
+                
                 switch (Option)
                 {
                     case 1:
-                        jogador.registrarJogador();                      
+                        jogador.registrarJogador(jogador.jogadores);                      
                         break;
                     case 2:
                         if(jogador.Logado != true)
@@ -65,9 +68,10 @@ namespace gamehub.entities
                         }                       
                         break;
                     case 3:
-                        jogador.salvarJogadores();
+                        Console.WriteLine(jogador.jogadores.Count());
                         break;                 
                     case 4:
+                       // jogador.mostrarJogadores();
                         break;
                     case 5:
                         break;
