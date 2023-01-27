@@ -6,8 +6,7 @@ namespace GameHub
     {
         public static void Main(string[] args)
         {
-            Menu iniciar = new Menu();
-            iniciar.exibirMenu();
+            Menu iniciar = new Menu();          
         }
     }
 }

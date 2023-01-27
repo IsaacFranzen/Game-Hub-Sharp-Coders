@@ -12,74 +12,102 @@ namespace gamehub.entities.JogoDaVelha
         public string[] posicoesNaMatriz;
         public string vazia = " ";
         public string vezJogador;
+        public int qtdJogadas;
 
 
         string[,] matrizTabuleiro = new string[3, 3];
         //passar o jogador de parametro pras funçoes
-        Jogador jogador = new Jogador();
+        
 
         public JogoDaVelha()
         {
+            
             fimDePartida = false;
-            posicoesNaMatriz = new[] { "1","2", "3", "4", "5", "6", "7", "8", "9" };
-            vezJogador = jogador.jogadorLogado;
+            posicoesNaMatriz = new[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+            vezJogador = "X";
+            qtdJogadas = 0;
 
         }
 
 
 
         public void ComecarPartida()
-        {
-            Jogador jogador = new Jogador();
+        { 
             Console.WriteLine("Digite o nome do jogador adversário: ");
-            jogador.oponente = Console.ReadLine();
             while (!fimDePartida)
             {
-
+                MostrarTabuleiro();
+                EscolherJogada();
+                MostrarTabuleiro();
+                FimDePartida(); 
+                mudarVezJogador();
             }
         }
 
-
-        public void FazerTabuleiro()
+        public void FimDePartida()
         {
-            for (int i = 0; i < 3; i++)
+            if (qtdJogadas < 5)
             {
-                for (int j = 0; j < 3; j++)
-                {
-
-                    if(i == 0)
-                    {
-                        matrizTabuleiro[i, j] = $"{j + 1}";
-                    }
-                    if(i == 1)
-                    {
-                        matrizTabuleiro[i, j] = $"{j + 4}";
-                    }
-                    if(i == 2)
-                    {
-                        matrizTabuleiro[i, j] = $"{j + 7}";
-                    }
-                }
+                return;
             }
+        }
+
+        public string FazerTabuleiro()
+        {
+            //Não consegui fazer do jeito anterior e fiz na mão mesmo
+            return $"__{posicoesNaMatriz[0]}__|__{posicoesNaMatriz[1]}__|__{posicoesNaMatriz[2]}__\n" +
+                    $"__{posicoesNaMatriz[3]}__|__{posicoesNaMatriz[4]}__|__{posicoesNaMatriz[5]}__\n" +
+                    $"  {posicoesNaMatriz[6]}  |  {posicoesNaMatriz[7]}  |  {posicoesNaMatriz[8]}  \n\n";
         }
 
         public void MostrarTabuleiro()
         {
-            FazerTabuleiro();
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
+            Console.Clear();
+            Console.WriteLine(FazerTabuleiro());
+        }
 
-                    Console.Write($"| {matrizTabuleiro[i, j]} |");
-                }
-                Console.WriteLine("");
+        public void EscolherJogada()
+        {
+            if(vezJogador == "X")
+            {
+                Console.WriteLine($"Vez do jogador X");
             }
+            else
+            {
+                Console.WriteLine($"Vez do jogador O");
+            }
+            Console.Write("Digite a posicao escolhida: ");
+            bool validaEntrada = int.TryParse(Console.ReadLine(), out int posicaoDigitada);
+
+            while (!validaEntrada || !ValidarJogada(posicaoDigitada))
+            {
+                Console.WriteLine("Posição inválida");
+                validaEntrada = int.TryParse(Console.ReadLine(), out posicaoDigitada);
+            }
+
+            ColocarNaPosicaoDigitada(posicaoDigitada);
+        }
+
+        public void ColocarNaPosicaoDigitada(int posicaoEscolhida)
+        {
+            int index = posicaoEscolhida - 1;
+            posicoesNaMatriz[index] = vezJogador;
+            qtdJogadas++;
+        }
+
+        public bool ValidarJogada(int posicaoEscolhida)
+        {
+            int index = posicaoEscolhida - 1;
+
+            return posicoesNaMatriz[index] != "O" && posicoesNaMatriz[index] != "X";
+
+
+
         }
 
         public void mudarVezJogador()
         {
-            vezJogador = vezJogador == jogador.jogadorLogado ? jogador.oponente : jogador.jogadorLogado;
+            vezJogador = vezJogador == "X" ? "O" : "X";
         }
     }
 }

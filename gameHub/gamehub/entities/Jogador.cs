@@ -12,12 +12,12 @@ namespace gamehub.entities
 {
     public class Jogador
     {
-        public string? Nome;
-        public string? Senha;
-        public int Pontuacao;
-        public bool Logado;
-        public string jogadorLogado;
-        public string oponente;
+        public string? Nome { get; set; }
+        public string? Senha { get; set; }
+        public int Pontuacao { get; set; }
+        public bool Logado { get; set; }
+        
+       
         public List<Jogador> jogadores = new List<Jogador>();
        
         public Jogador() 
@@ -37,7 +37,7 @@ namespace gamehub.entities
                 {
                     Nome = nome,
                     Senha = senha,
-                    Logado = false
+                    
                 };
 
                 jogadores.Add(jogador);
@@ -73,12 +73,12 @@ namespace gamehub.entities
         {
             if (jogadores.Count != 0 )
             {
-            Console.Write("Digite seu nome:");
+            Console.Write("Digite seu nome: ");
             string nomeDigitado = Console.ReadLine();
-
-            Console.Write("Digite sua senha:");
+                
+                Console.Write("Digite sua senha: ");
             string senhaDigitada = Console.ReadLine();
-
+              
             foreach (Jogador jogador in jogadores)
             {
                 if (jogador.Nome == nomeDigitado && jogador.Senha == senhaDigitada)
@@ -89,8 +89,7 @@ namespace gamehub.entities
                         Console.ResetColor();
                         Console.WriteLine("");
                         Logado = true;
-                        jogadorLogado = nomeDigitado;
-                    break;
+                        break;
                 }
             }
             if (!Logado)

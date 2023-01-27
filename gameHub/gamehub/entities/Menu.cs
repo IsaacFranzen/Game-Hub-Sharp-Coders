@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using gamehub.entities.JogoDaVelha;
+
 namespace gamehub.entities
 {
     public class Menu
@@ -13,13 +14,13 @@ namespace gamehub.entities
         
         public Menu()
         {
-                     
+            exibirMenu();  
         }
         
         public void exibirMenu()
         {            
             Jogador jogador = new Jogador();
-           JogoDaVelha.JogoDaVelha incio = new JogoDaVelha.JogoDaVelha();
+            JogoDaVelha.JogoDaVelha incio = new JogoDaVelha.JogoDaVelha();
                  
 
             jogador.LerJogadoresJson(jogador.jogadores);
@@ -79,7 +80,7 @@ namespace gamehub.entities
                         }                       
                         break;
                     case 3:
-                        Console.WriteLine(jogador.jogadores.Count());
+                        
                         break;                 
                     case 4:
                         jogador.ListarJogadores(jogador.jogadores);
@@ -92,7 +93,7 @@ namespace gamehub.entities
                         Environment.Exit(0);
                         break;
                     case 7:
-                        incio.MostrarTabuleiro();
+                        new JogoDaVelha.JogoDaVelha().ComecarPartida();
                         break;
                     default:
                         Console.WriteLine("Opção inválida, tente novamente.");
