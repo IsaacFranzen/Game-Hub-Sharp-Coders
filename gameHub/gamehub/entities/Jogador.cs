@@ -58,7 +58,13 @@ namespace gamehub.entities
             {
                 List<Jogador> todosOsJogadores = JsonSerializer.Deserialize<List<Jogador>>(jsonJogadores);
                 todosOsJogadores.ForEach(jogador => jogadores.Add(jogador));
+
             }
+        }
+
+        public void listarJogadores(List<Jogador> jogadores)
+        {
+            jogadores.ForEach(jogador => { Console.WriteLine(jogador.Nome); });
         }
 
         public void fazerLogin()
@@ -75,7 +81,11 @@ namespace gamehub.entities
             {
                 if (jogador.Nome == nomeDigitado && jogador.Senha == senhaDigitada)
                 {
-                    Console.WriteLine("Logado com sucesso!");
+                        Console.WriteLine("");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Logado com sucesso!");
+                        Console.ResetColor();
+                        Console.WriteLine("");
                     Logado = true;
                     break;
                 }

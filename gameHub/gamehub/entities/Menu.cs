@@ -43,9 +43,16 @@ namespace gamehub.entities
                 }
                 if (jogador.Logado == true)
                 {
-                    Console.Write("Escolha o jogo para jogar");
-                    Console.Write("7 - Jogar jogo da velha");
+                    Console.WriteLine("");
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;           
+                    Console.Write(
+                              "    Escolha o jogo!      \n"+
+                             "##########################\n" +
+                             "# 7 - Jogo da velha       #\n" +
+                             "# 8 - Natalha naval       #\n" +
+                             "##########################");
                 }
+                Console.ResetColor();
                 Console.WriteLine("");
                 Console.WriteLine("");
                 Console.Write("Digite a opção escolhida: ");
@@ -71,7 +78,7 @@ namespace gamehub.entities
                         Console.WriteLine(jogador.jogadores.Count());
                         break;                 
                     case 4:
-                       // jogador.mostrarJogadores();
+                        jogador.listarJogadores(jogador.jogadores);
                         break;
                     case 5:
                         break;
