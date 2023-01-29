@@ -48,11 +48,11 @@ namespace gamehub.entities
                 };
 
                 jogadores.Add(jogador);
+
+
+        
+            string roothPath = @"C:\Users\isaac\OneDrive\Área de Trabalho\GameHub\Game-Hub-Sharp-Coders\gameHub\gamehub\entities\";
             
-
-            // string roothPath = @"C:\Users\isaac\OneDrive\Área de Trabalho\gameHub\gameHub\gamehub\"; caminho pc mesa
-            string roothPath = @"C:\Users\isaac\OneDrive\Área de Trabalho\hubDeJogos\Game-Hub-Sharp-Coders\gameHub\gamehub\entities\";
-
             string filePath = roothPath + "jogadores.json";
             if (!File.Exists(filePath))
             {
@@ -66,7 +66,7 @@ namespace gamehub.entities
         public void LerJogadoresJson(List<Jogador> jogadores)
         {
             //string jsonJogadores = @"C:\Users\isaac\OneDrive\Área de Trabalho\gameHub\gameHub\gamehub\"; caminho pc mesa
-            string jsonJogadores = File.ReadAllText(@"C:\Users\isaac\OneDrive\Área de Trabalho\hubDeJogos\Game-Hub-Sharp-Coders\gameHub\gamehub\entities\jogadores.json");
+            string jsonJogadores = File.ReadAllText(@"C:\Users\isaac\OneDrive\Área de Trabalho\GameHub\Game-Hub-Sharp-Coders\gameHub\gamehub\entities\jogadores.json");
             if (!String.IsNullOrEmpty(jsonJogadores))
             {
                 List<Jogador> todosOsJogadores = JsonSerializer.Deserialize<List<Jogador>>(jsonJogadores);
