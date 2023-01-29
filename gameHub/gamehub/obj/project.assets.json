@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\isaac\\OneDrive\\Área de Trabalho\\gameHub\\gamehub\\gamehub\\gamehub.csproj",
+      "projectUniqueName": "C:\\Users\\isaac\\OneDrive\\Área de Trabalho\\hubDeJogos\\Game-Hub-Sharp-Coders\\gameHub\\gamehub\\gamehub.csproj",
       "projectName": "gamehub",
-      "projectPath": "C:\\Users\\isaac\\OneDrive\\Área de Trabalho\\gameHub\\gamehub\\gamehub\\gamehub.csproj",
+      "projectPath": "C:\\Users\\isaac\\OneDrive\\Área de Trabalho\\hubDeJogos\\Game-Hub-Sharp-Coders\\gameHub\\gamehub\\gamehub.csproj",
       "packagesPath": "C:\\Users\\isaac\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\isaac\\OneDrive\\Área de Trabalho\\gameHub\\gamehub\\gamehub\\obj\\",
+      "outputPath": "C:\\Users\\isaac\\OneDrive\\Área de Trabalho\\hubDeJogos\\Game-Hub-Sharp-Coders\\gameHub\\gamehub\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -26,6 +26,7 @@ namespace gamehub.entities.JogoDaVelha
             posicoesNaMatriz = new[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
             vezJogador = "X";
             qtdJogadas = 0;
+            
 
         }
 
@@ -39,16 +40,8 @@ namespace gamehub.entities.JogoDaVelha
                 MostrarTabuleiro();
                 EscolherJogada();
                 MostrarTabuleiro();
-                FimDePartida(); 
+                ValidaFimDeJogo(); 
                 mudarVezJogador();
-            }
-        }
-
-        public void FimDePartida()
-        {
-            if (qtdJogadas < 5)
-            {
-                return;
             }
         }
 
@@ -68,6 +61,7 @@ namespace gamehub.entities.JogoDaVelha
 
         public void EscolherJogada()
         {
+            
             if(vezJogador == "X")
             {
                 Console.WriteLine($"Vez do jogador X");
@@ -108,6 +102,52 @@ namespace gamehub.entities.JogoDaVelha
         public void mudarVezJogador()
         {
             vezJogador = vezJogador == "X" ? "O" : "X";
+        }
+
+        public bool VenceuHorizontal()
+        {
+            bool linha1 = posicoesNaMatriz[0] == posicoesNaMatriz[1] && posicoesNaMatriz[0] == posicoesNaMatriz[2];
+            bool linha2 = posicoesNaMatriz[3] == posicoesNaMatriz[4] && posicoesNaMatriz[3] == posicoesNaMatriz[5];
+            bool linha3 = posicoesNaMatriz[6] == posicoesNaMatriz[7] && posicoesNaMatriz[6] == posicoesNaMatriz[8];
+
+            return linha1 || linha2 || linha3;
+        }
+
+        public bool VenceuVertical()
+        {
+            bool linha1 = posicoesNaMatriz[0] == posicoesNaMatriz[3] && posicoesNaMatriz[0] == posicoesNaMatriz[6];
+            bool linha2 = posicoesNaMatriz[1] == posicoesNaMatriz[4] && posicoesNaMatriz[1] == posicoesNaMatriz[7];
+            bool linha3 = posicoesNaMatriz[2] == posicoesNaMatriz[5] && posicoesNaMatriz[2] == posicoesNaMatriz[8];
+
+            return linha1 || linha2 || linha3;
+        }
+
+        public bool VenceuDiagonais()
+        {
+            bool linha1 = posicoesNaMatriz[2] == posicoesNaMatriz[4] && posicoesNaMatriz[2] == posicoesNaMatriz[6];
+            bool linha2 = posicoesNaMatriz[0] == posicoesNaMatriz[4] && posicoesNaMatriz[0] == posicoesNaMatriz[8];
+
+
+            return linha1 || linha2;
+        }
+
+        private void ValidaFimDeJogo()
+        {
+            if (qtdJogadas < 5)
+                return;
+
+            if (VenceuHorizontal() || VenceuVertical() || VenceuDiagonais())
+            {
+                fimDePartida = true;
+                Console.WriteLine($"Fim de jogo!!! Vitória de {vezJogador}");
+                return;
+            }
+
+            if (qtdJogadas == 9)
+            {
+                fimDePartida = true;
+                Console.WriteLine("Fim de jogo!!! EMPATE");
+            }
         }
     }
 }

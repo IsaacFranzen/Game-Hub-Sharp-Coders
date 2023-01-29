@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json.Serialization;
+using System.Net.Http.Json;
+using System.Xml.Linq;
 
 namespace gamehub.entities
 {
@@ -20,8 +22,13 @@ namespace gamehub.entities
        
         public List<Jogador> jogadores = new List<Jogador>();
        
-        public Jogador() 
+
+        public Jogador() { }
+
+        public Jogador(string? nome, string? senha)
         {
+            Nome = nome;
+            Senha = senha;
         }
 
         public void RegistrarJogador(List<Jogador>jogadores)
@@ -33,7 +40,7 @@ namespace gamehub.entities
                 Console.Write("Digite a sua senha: ");
                 string senha = Console.ReadLine();
 
-                Jogador jogador = new Jogador
+                Jogador jogador = new Jogador(nome,senha)
                 {
                     Nome = nome,
                     Senha = senha,
@@ -42,7 +49,9 @@ namespace gamehub.entities
 
                 jogadores.Add(jogador);
 
-            string roothPath = @"C:\Users\isaac\OneDrive\Área de Trabalho\gameHub\gameHub\gamehub\";
+            // string roothPath = @"C:\Users\isaac\OneDrive\Área de Trabalho\gameHub\gameHub\gamehub\"; caminho pc mesa
+            string roothPath = @"C:\Users\isaac\OneDrive\Área de Trabalho\hubDeJogos\Game-Hub-Sharp-Coders\gameHub\gamehub\entities\jogadores.json";
+
             string filePath = roothPath + "jogadores.json";
             if (!File.Exists(filePath))
             {
@@ -55,22 +64,24 @@ namespace gamehub.entities
 
         public void LerJogadoresJson(List<Jogador> jogadores)
         {
-            string jsonJogadores = File.ReadAllText(@"C:\Users\isaac\OneDrive\Área de Trabalho\gameHub\gameHub\gamehub\jogadores.json");
+            //string jsonJogadores = @"C:\Users\isaac\OneDrive\Área de Trabalho\gameHub\gameHub\gamehub\"; caminho pc mesa
+            string jsonJogadores = File.ReadAllText(@"C:\Users\isaac\OneDrive\Área de Trabalho\hubDeJogos\Game-Hub-Sharp-Coders\gameHub\gamehub\entities\jogadores.json");
             if (!String.IsNullOrEmpty(jsonJogadores))
             {
                 List<Jogador> todosOsJogadores = JsonSerializer.Deserialize<List<Jogador>>(jsonJogadores);
                 todosOsJogadores.ForEach(jogador => jogadores.Add(jogador));
 
             }
+            
         }
 
         public void ListarJogadores(List<Jogador> jogadores)
         {
             jogadores.ForEach(jogador => { Console.WriteLine(jogador.Nome); });
         }
-
         public void fazerLogin()
         {
+           
             if (jogadores.Count != 0 )
             {
             Console.Write("Digite seu nome: ");
@@ -87,7 +98,7 @@ namespace gamehub.entities
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Logado com sucesso!");
                         Console.ResetColor();
-                        Console.WriteLine("");
+                        Console.WriteLine("");                       ;
                         Logado = true;
                         break;
                 }
@@ -103,6 +114,8 @@ namespace gamehub.entities
                 Console.WriteLine("Registre ao menos um usuário para fazer o login.");
                 Console.WriteLine("");
             }
+
+            
         }      
     }
 }
