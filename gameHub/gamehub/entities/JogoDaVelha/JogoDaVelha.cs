@@ -13,8 +13,9 @@ namespace gamehub.entities.JogoDaVelha
         public string vazia = " ";
         public string vezJogador;
         public int qtdJogadas;
+        
 
-
+        
         string[,] matrizTabuleiro = new string[3, 3];
         //passar o jogador de parametro pras funçoes
         
@@ -30,6 +31,7 @@ namespace gamehub.entities.JogoDaVelha
 
         }
 
+       
 
 
         public void ComecarPartida()
@@ -44,6 +46,7 @@ namespace gamehub.entities.JogoDaVelha
                 mudarVezJogador();
             }
         }
+
 
         public string FazerTabuleiro()
         {

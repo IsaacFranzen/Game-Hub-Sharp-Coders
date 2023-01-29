@@ -21,8 +21,8 @@ namespace gamehub.entities
         
        
         public List<Jogador> jogadores = new List<Jogador>();
-       
 
+        
         public Jogador() { }
 
         public Jogador(string? nome, string? senha)
@@ -48,9 +48,10 @@ namespace gamehub.entities
                 };
 
                 jogadores.Add(jogador);
+            
 
             // string roothPath = @"C:\Users\isaac\OneDrive\Área de Trabalho\gameHub\gameHub\gamehub\"; caminho pc mesa
-            string roothPath = @"C:\Users\isaac\OneDrive\Área de Trabalho\hubDeJogos\Game-Hub-Sharp-Coders\gameHub\gamehub\entities\jogadores.json";
+            string roothPath = @"C:\Users\isaac\OneDrive\Área de Trabalho\hubDeJogos\Game-Hub-Sharp-Coders\gameHub\gamehub\entities\";
 
             string filePath = roothPath + "jogadores.json";
             if (!File.Exists(filePath))
@@ -74,7 +75,7 @@ namespace gamehub.entities
             }
             
         }
-
+        
         public void ListarJogadores(List<Jogador> jogadores)
         {
             jogadores.ForEach(jogador => { Console.WriteLine(jogador.Nome); });
@@ -98,7 +99,7 @@ namespace gamehub.entities
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Logado com sucesso!");
                         Console.ResetColor();
-                        Console.WriteLine("");                       ;
+                        Console.WriteLine("");
                         Logado = true;
                         break;
                 }
