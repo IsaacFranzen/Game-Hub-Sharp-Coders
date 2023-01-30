@@ -43,9 +43,12 @@ namespace gamehub.entities.JogoDaVelha
         public string FazerTabuleiro()
         {
             //Não consegui fazer do jeito anterior e fiz na mão mesmo
-            return $"__{posicoesNaMatriz[0]}__|__{posicoesNaMatriz[1]}__|__{posicoesNaMatriz[2]}__\n" +
-                    $"__{posicoesNaMatriz[3]}__|__{posicoesNaMatriz[4]}__|__{posicoesNaMatriz[5]}__\n" +
-                    $"  {posicoesNaMatriz[6]}  |  {posicoesNaMatriz[7]}  |  {posicoesNaMatriz[8]}  \n\n";
+
+            return
+                $"__{posicoesNaMatriz[0]}__|__{posicoesNaMatriz[1]}__|__{posicoesNaMatriz[2]}__\n" +
+                $"__{posicoesNaMatriz[3]}__|__{posicoesNaMatriz[4]}__|__{posicoesNaMatriz[5]}__\n" +
+                $"  {posicoesNaMatriz[6]}  |  {posicoesNaMatriz[7]}  |  {posicoesNaMatriz[8]}  \n\n ";
+              
         }
 
         public void MostrarTabuleiro()
@@ -139,7 +142,7 @@ namespace gamehub.entities.JogoDaVelha
         }
 
 
-        public void AumentaPontuacao(List<Jogador> jogadores)
+        public void AumentaPontuacaoX(List<Jogador> jogadores)
         {
             
            string jsonJogadores = File.ReadAllText(@"C:\Users\isaac\OneDrive\Área de Trabalho\GameHub\Game-Hub-Sharp-Coders\gameHub\gamehub\entities\jogadores.json");
@@ -147,6 +150,21 @@ namespace gamehub.entities.JogoDaVelha
            List<Jogador> todosOsJogadores = JsonSerializer.Deserialize<List<Jogador>>(jsonJogadores);
            Jogador teste = todosOsJogadores.FirstOrDefault(e => e.Nome == jogador1);
             if(teste != null) {
+                teste.Pontuacao += 10;
+            }
+            string jsonAtt = JsonSerializer.Serialize(todosOsJogadores);
+            File.WriteAllText(@"C:\Users\isaac\OneDrive\Área de Trabalho\GameHub\Game-Hub-Sharp-Coders\gameHub\gamehub\entities\jogadores.json", jsonAtt);
+        }
+
+        public void AumentaPontuacaoO(List<Jogador> jogadores)
+        {
+
+            string jsonJogadores = File.ReadAllText(@"C:\Users\isaac\OneDrive\Área de Trabalho\GameHub\Game-Hub-Sharp-Coders\gameHub\gamehub\entities\jogadores.json");
+
+            List<Jogador> todosOsJogadores = JsonSerializer.Deserialize<List<Jogador>>(jsonJogadores);
+            Jogador teste = todosOsJogadores.FirstOrDefault(e => e.Nome == jogador2);
+            if (teste != null)
+            {
                 teste.Pontuacao += 10;
             }
             string jsonAtt = JsonSerializer.Serialize(todosOsJogadores);
@@ -165,8 +183,12 @@ namespace gamehub.entities.JogoDaVelha
                 switch (vezJogador)
                 {
                     case "X":
-                        AumentaPontuacao(jogadores);
-                        Console.WriteLine("Pontuação subiu!");
+                        AumentaPontuacaoX(jogadores);
+                        Console.WriteLine($"Pontuação do jogador {jogador1} subiu!");
+                        break;
+                    case "O":
+                        AumentaPontuacaoO(jogadores);
+                        Console.WriteLine($"Pontuação do jogador {jogador2} subiu!");
                         break;
                 }
                 return;

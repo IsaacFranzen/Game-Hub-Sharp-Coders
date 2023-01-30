@@ -85,6 +85,11 @@ namespace gamehub.entities
             jogadores.ForEach(jogador => { Console.WriteLine(jogador.Nome); });
         }
 
+        public void Ranking(List<Jogador> jogadores)
+        {
+            jogadores.ForEach(jogador => { Console.WriteLine($"Jogador: {jogador.Nome} -> Pontuação: {jogador.Pontuacao}"); });
+        }
+
         public void fazerLogin()
         {
            
@@ -123,6 +128,11 @@ namespace gamehub.entities
             }
 
             
-        }      
+        } 
+        public void Logout()
+        {
+            Logado= false;
+            Console.WriteLine("Logout feito com sucesso");
+        }
     }
 }
