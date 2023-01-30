@@ -25,10 +25,16 @@ namespace gamehub.entities
         
         public Jogador() { }
 
+
         public Jogador(string? nome, string? senha)
         {
             Nome = nome;
             Senha = senha;
+        }
+
+        public Jogador(string nome)
+        {
+            Nome = nome;
         }
 
         public void RegistrarJogador(List<Jogador>jogadores)
@@ -48,9 +54,7 @@ namespace gamehub.entities
                 };
 
                 jogadores.Add(jogador);
-
-
-        
+       
             string roothPath = @"C:\Users\isaac\OneDrive\Área de Trabalho\GameHub\Game-Hub-Sharp-Coders\gameHub\gamehub\entities\";
             
             string filePath = roothPath + "jogadores.json";
@@ -80,6 +84,7 @@ namespace gamehub.entities
         {
             jogadores.ForEach(jogador => { Console.WriteLine(jogador.Nome); });
         }
+
         public void fazerLogin()
         {
            
@@ -100,6 +105,7 @@ namespace gamehub.entities
                         Console.WriteLine("Logado com sucesso!");
                         Console.ResetColor();
                         Console.WriteLine("");
+                        
                         Logado = true;
                         break;
                 }

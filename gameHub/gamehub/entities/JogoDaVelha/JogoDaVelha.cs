@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace gamehub.entities.JogoDaVelha
@@ -13,32 +14,24 @@ namespace gamehub.entities.JogoDaVelha
         public string vazia = " ";
         public string vezJogador;
         public int qtdJogadas;
-        
+        public string jogador1 { get; set; }
+        public string jogador2 { get; set; }
 
-        
-        string[,] matrizTabuleiro = new string[3, 3];
-        //passar o jogador de parametro pras funçoes
-        
 
         public JogoDaVelha()
         {
-            
             fimDePartida = false;
             posicoesNaMatriz = new[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
             vezJogador = "X";
-            qtdJogadas = 0;
-            
-
+            qtdJogadas = 0;         
         }
 
-       
-
-
         public void ComecarPartida()
-        { 
-            Console.WriteLine("Digite o nome do jogador adversário: ");
+        {
+            GetJogadores();
             while (!fimDePartida)
             {
+                
                 MostrarTabuleiro();
                 EscolherJogada();
                 MostrarTabuleiro();
@@ -46,7 +39,6 @@ namespace gamehub.entities.JogoDaVelha
                 mudarVezJogador();
             }
         }
-
 
         public string FazerTabuleiro()
         {
@@ -62,16 +54,28 @@ namespace gamehub.entities.JogoDaVelha
             Console.WriteLine(FazerTabuleiro());
         }
 
+        public void GetJogadores()
+        {
+            Console.Write("Digite o nome do primeiro jogador: ");
+            string nomeJogador1 = Console.ReadLine();
+            Console.Write("Digite o nome do segundo jogador: ");
+            string nomeJogador2 = Console.ReadLine();
+
+            jogador1 = nomeJogador1;
+            jogador2 = nomeJogador2;
+
+        }
+
         public void EscolherJogada()
         {
             
-            if(vezJogador == "X")
+            if (vezJogador == "X")
             {
-                Console.WriteLine($"Vez do jogador X");
+                Console.WriteLine($"Vez do jogador X {jogador1}:");
             }
             else
             {
-                Console.WriteLine($"Vez do jogador O");
+                Console.WriteLine($"Vez do jogador O {jogador2}:");
             }
             Console.Write("Digite a posicao escolhida: ");
             bool validaEntrada = int.TryParse(Console.ReadLine(), out int posicaoDigitada);
@@ -134,6 +138,21 @@ namespace gamehub.entities.JogoDaVelha
             return linha1 || linha2;
         }
 
+
+        public void AumentaPontuacao(List<Jogador> jogadores)
+        {
+            
+           string jsonJogadores = File.ReadAllText(@"C:\Users\isaac\OneDrive\Área de Trabalho\GameHub\Game-Hub-Sharp-Coders\gameHub\gamehub\entities\jogadores.json");
+            
+           List<Jogador> todosOsJogadores = JsonSerializer.Deserialize<List<Jogador>>(jsonJogadores);
+           Jogador teste = todosOsJogadores.FirstOrDefault(e => e.Nome == jogador1);
+            if(teste != null) {
+                teste.Pontuacao += 10;
+            }
+            string jsonAtt = JsonSerializer.Serialize(todosOsJogadores);
+            File.WriteAllText(@"C:\Users\isaac\OneDrive\Área de Trabalho\GameHub\Game-Hub-Sharp-Coders\gameHub\gamehub\entities\jogadores.json", jsonAtt);
+        }
+
         private void ValidaFimDeJogo()
         {
             if (qtdJogadas < 5)
@@ -143,6 +162,13 @@ namespace gamehub.entities.JogoDaVelha
             {
                 fimDePartida = true;
                 Console.WriteLine($"Fim de jogo!!! Vitória de {vezJogador}");
+                switch (vezJogador)
+                {
+                    case "X":
+                        AumentaPontuacao(jogadores);
+                        Console.WriteLine("Pontuação subiu!");
+                        break;
+                }
                 return;
             }
 
