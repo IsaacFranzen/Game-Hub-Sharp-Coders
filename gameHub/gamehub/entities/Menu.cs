@@ -1,5 +1,7 @@
 ﻿using gamehub.entities.BatalhaNaval;
 using gamehub.entities.JogoDaVelha;
+
+using jogoDeXadrez.Entities.Xadrez;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +17,7 @@ namespace gamehub.entities
         
         public Menu()
         {
-            exibirMenu();  
+            exibirMenu();           
         }
         
         public void exibirMenu()
@@ -23,7 +25,6 @@ namespace gamehub.entities
             Jogador jogador = new Jogador();
             JogoDaVelha.JogoDaVelha incio = new JogoDaVelha.JogoDaVelha();
                  
-
             jogador.LerJogadoresJson(jogador.jogadores);
             bool loopMenu = true;
 
@@ -56,6 +57,7 @@ namespace gamehub.entities
                              "##########################\n" +
                              "# 7 - Jogo da velha       #\n" +
                              "# 8 - Batalha naval       #\n" +
+                             "# 9 - Xadrez              #\n" +
                              "##########################");
                 }
                 Console.ResetColor();
@@ -99,6 +101,10 @@ namespace gamehub.entities
                         break;
                     case 8:
                         TabuleiroBn tabuleiro = new TabuleiroBn();
+                        break;
+                    case 9:
+                        Tabuleiro tabuleiroXadrez = new Tabuleiro();
+                        loopMenu = false;
                         break;
                     default:
                         Console.WriteLine("Opção inválida, tente novamente.");

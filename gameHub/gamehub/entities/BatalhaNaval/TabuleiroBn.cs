@@ -4,6 +4,9 @@ using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
+using jogoDeXadrez.Entities.Enums;
+
+
 
 namespace gamehub.entities.BatalhaNaval
 {

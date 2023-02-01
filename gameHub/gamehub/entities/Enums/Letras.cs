@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gamehub.entities
+namespace jogoDeXadrez.Entities.Enums
 {
     public enum Letras
     {
@@ -16,7 +16,5 @@ namespace gamehub.entities
         F = 6,
         G = 7,
         H = 8,
-        I = 9,
-        J = 10,
     }
 }
