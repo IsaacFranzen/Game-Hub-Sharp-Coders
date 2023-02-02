@@ -29,5 +29,11 @@ namespace jogoDeXadrez.Entities.Xadrez
         {
             return LetrasPecas.ToString();
         }
+
+        public virtual bool confereMovimento(int colunaFinal, int linhaFinal, Tabuleiro tab) 
+        {
+            return false;
+        }
+
     }
 }

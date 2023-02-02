@@ -1,4 +1,5 @@
-﻿using gamehub.entities.Enums;
+﻿using gamehub.entities;
+using gamehub.entities.Enums;
 using jogoDeXadrez.Entities.Enums;
 using System.Drawing;
 using System.Text.RegularExpressions;
@@ -8,7 +9,6 @@ namespace jogoDeXadrez.Entities.Xadrez
     public class Tabuleiro
     {
         public static Pecas[,] tabuleiroX { get; set; }
-        public static Pecas peca;
         public static int linhaInicial;
         public static int linhaFinal;
         public static int colunaInicial;
@@ -17,16 +17,17 @@ namespace jogoDeXadrez.Entities.Xadrez
         public static string posicaoDestino;
         public static string[] LetrasColunas { get; set; }
         public static string[] NumerosLinhas { get; set; }
-        
+        public static string jogadorWhite;
+        public static string jogadorBlack;
+        public static string vezJogador;
+        public bool fimDePartida;
+
 
         public Tabuleiro()
         {
+            vezJogador = "Brancas";
             criaTabuleiro();
-            exibirTabuleiro();
-            pegaPosicaoOrigem();
-            pegaPosicaoDestino();
-            moverPeca();
-            exibirTabuleiro();
+
         }
 
         public void criaTabuleiro() 
@@ -173,6 +174,16 @@ namespace jogoDeXadrez.Entities.Xadrez
 
         public static void pegaPosicaoOrigem()
         {
+
+            if (vezJogador == "Brancas")
+            {
+                Console.WriteLine($"Vez do jogador {jogadorWhite} Brancas:");
+            }
+            else
+            {
+                Console.WriteLine($"Vez do jogador {jogadorBlack} Pretas:");
+            }
+            
             Console.WriteLine("Digite a posição de origem: ex a1: ");
             posicaoOrigem = Console.ReadLine();
             colunaInicial = Array.IndexOf(LetrasColunas, Convert.ToString(posicaoOrigem[0]));
@@ -184,6 +195,17 @@ namespace jogoDeXadrez.Entities.Xadrez
         }
         public static void pegaPosicaoDestino()
         {
+
+            if (vezJogador == "Brancas")
+            {
+                Console.WriteLine($"Vez do jogador {jogadorWhite} Brancas:");
+            }
+            else
+            {
+                Console.WriteLine($"Vez do jogador {jogadorBlack} Pretas:");
+            }
+
+            
             Console.WriteLine("Digite a posição destino: ex a1: ");
             posicaoDestino = Console.ReadLine();
 
@@ -194,9 +216,42 @@ namespace jogoDeXadrez.Entities.Xadrez
 
         public static void moverPeca()
         {
+            tabuleiroX[linhaInicial, colunaInicial].qtdDeMovimentos++;
             tabuleiroX[linhaFinal, colunaFinal] = tabuleiroX[linhaInicial, colunaInicial];
-            tabuleiroX[linhaInicial, colunaInicial] = new Pecas(linhaInicial,colunaFinal);
-            
+            tabuleiroX[linhaInicial, colunaInicial] = new Pecas(linhaInicial,colunaFinal);           
+        }
+
+        public void GetJogadores()
+        {
+            Console.Write("Digite o nome do primeiro jogador: ");
+            string nomeJogador1 = Console.ReadLine();
+            Console.Write("Digite o nome do segundo jogador: ");
+            string nomeJogador2 = Console.ReadLine();
+
+            jogadorWhite = nomeJogador1;
+            jogadorBlack = nomeJogador2;
+
+        }
+
+        public void mudarVezJogador()
+        {
+            vezJogador = vezJogador == "Brancas" ? "Pretas" : "Brancas";
+        }
+
+        public void ComecarPartida()
+        {
+            GetJogadores();
+            while (!fimDePartida)
+            {
+                
+                
+                exibirTabuleiro();
+                pegaPosicaoOrigem();
+                pegaPosicaoDestino();
+                moverPeca();
+                exibirTabuleiro();
+                mudarVezJogador();
+            }
         }
     }
 }

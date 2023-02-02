@@ -104,7 +104,7 @@ namespace gamehub.entities
                         break;
                     case 9:
                         Tabuleiro tabuleiroXadrez = new Tabuleiro();
-                        //tabuleiroXadrez.Play();
+                       tabuleiroXadrez.ComecarPartida();
                         break;
                     default:
                         Console.WriteLine("Opção inválida, tente novamente.");
