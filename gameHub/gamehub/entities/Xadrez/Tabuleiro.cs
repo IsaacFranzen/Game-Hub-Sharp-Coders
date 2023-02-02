@@ -1,26 +1,42 @@
 ﻿using gamehub.entities.Enums;
 using jogoDeXadrez.Entities.Enums;
 using System.Drawing;
+using System.Text.RegularExpressions;
 
 namespace jogoDeXadrez.Entities.Xadrez
 {
     public class Tabuleiro
     {
         public static Pecas[,] tabuleiroX { get; set; }
+        public static Pecas peca;
         public static int linhaInicial;
         public static int linhaFinal;
         public static int colunaInicial;
         public static int colunaFinal;
+        public static string posicaoOrigem;
+        public static string posicaoDestino;
         public static string[] LetrasColunas { get; set; }
         public static string[] NumerosLinhas { get; set; }
+        
 
         public Tabuleiro()
         {
-            NumerosLinhas = new string[8] {"1","2","3","4","5","6","7","8"};
-            LetrasColunas = new string[8] {"a","b","c","d","e","f","g","h"};
+            criaTabuleiro();
+            exibirTabuleiro();
+            pegaPosicaoOrigem();
+            pegaPosicaoDestino();
+            moverPeca();
+            exibirTabuleiro();
+        }
 
-            tabuleiroX = new Pecas[8,8];
-            
+        public void criaTabuleiro() 
+        {
+
+            NumerosLinhas = new string[8] { "1", "2", "3", "4", "5", "6", "7", "8" };
+            LetrasColunas = new string[8] { "a", "b", "c", "d", "e", "f", "g", "h" };
+
+            tabuleiroX = new Pecas[8, 8];
+
 
             for (int i = 0; i < 8; i++)
             {
@@ -63,7 +79,7 @@ namespace jogoDeXadrez.Entities.Xadrez
             tabuleiroX[7, 2] = new Bispo(7, 2, Cor.Black);
             tabuleiroX[7, 5] = new Bispo(7, 5, Cor.Black);
 
-            // Rainha branca
+            //Rainha branca
             tabuleiroX[0, 3] = new Rainha(0, 3, Cor.White);
 
             //Rainha preta
@@ -74,8 +90,8 @@ namespace jogoDeXadrez.Entities.Xadrez
 
             //Rei preto
             tabuleiroX[7, 4] = new Rei(7, 4, Cor.Black);
-            exibirTabuleiro();
         }
+
 
         public void exibirTabuleiro()
         {
@@ -151,7 +167,36 @@ namespace jogoDeXadrez.Entities.Xadrez
                         }
                     }
                 }
+            Console.WriteLine("");
+
         }
 
+        public static void pegaPosicaoOrigem()
+        {
+            Console.WriteLine("Digite a posição de origem: ex a1: ");
+            posicaoOrigem = Console.ReadLine();
+            colunaInicial = Array.IndexOf(LetrasColunas, Convert.ToString(posicaoOrigem[0]));
+            linhaInicial = Array.IndexOf(NumerosLinhas, Convert.ToString(posicaoOrigem[1]));
+            //Console.WriteLine(colunaInicial);
+            //Console.WriteLine(linhaInicial);
+            //Console.WriteLine(tabuleiroX[linhaInicial,colunaInicial].LetrasPecas);
+            
+        }
+        public static void pegaPosicaoDestino()
+        {
+            Console.WriteLine("Digite a posição destino: ex a1: ");
+            posicaoDestino = Console.ReadLine();
+
+            colunaFinal = Array.IndexOf(LetrasColunas, Convert.ToString(posicaoDestino[0]));
+            linhaFinal = Array.IndexOf(NumerosLinhas, Convert.ToString(posicaoDestino[1]));
+
+        }
+
+        public static void moverPeca()
+        {
+            tabuleiroX[linhaFinal, colunaFinal] = tabuleiroX[linhaInicial, colunaInicial];
+            tabuleiroX[linhaInicial, colunaInicial] = new Pecas(linhaInicial,colunaFinal);
+            
+        }
     }
 }

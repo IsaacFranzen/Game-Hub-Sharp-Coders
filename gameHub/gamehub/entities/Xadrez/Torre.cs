@@ -11,7 +11,7 @@ namespace jogoDeXadrez.Entities.Xadrez
     {
         public Torre(int linha, int coluna, Cor cor) : base(linha, coluna)
         {
-            cor = cor;
+            Cor = cor;
             LetrasPecas = LetrasPecas.T;
         }
     }

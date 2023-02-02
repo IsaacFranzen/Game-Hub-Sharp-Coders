@@ -16,11 +16,6 @@ namespace jogoDeXadrez.Entities.Xadrez
         public Cor Cor;
         public LetrasPecas LetrasPecas;
 
-        public Pecas()
-        {
-
-        }
-
         public Pecas(int linha, int coluna)
         {
             Linha = linha;
