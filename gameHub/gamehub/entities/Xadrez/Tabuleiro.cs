@@ -98,7 +98,7 @@ namespace jogoDeXadrez.Entities.Xadrez
 
         public void exibirTabuleiro()
         {
-           //Console.Clear();
+            Console.Clear();
             Console.Write("\n  ");
             for (int i = 0; i < 8; i++)
             {
@@ -254,10 +254,6 @@ namespace jogoDeXadrez.Entities.Xadrez
                 pegaPosicaoOrigem();
                 pegaPosicaoDestino();
                 peca = Tabuleiro.tabuleiroX[linhaInicial, colunaInicial];
-                if (checaMovimento(ref peca, linhaFinal, colunaFinal) == false)
-                {
-                    Console.WriteLine("Posição inválida");
-                }
                 if (checaMovimento(ref peca, linhaFinal, colunaFinal) == true)
                 {
                     moverPeca();
