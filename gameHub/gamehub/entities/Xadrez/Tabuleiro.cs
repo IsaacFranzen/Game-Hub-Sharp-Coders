@@ -9,6 +9,7 @@ namespace jogoDeXadrez.Entities.Xadrez
     public class Tabuleiro
     {
         public static Pecas[,] tabuleiroX { get; set; }
+        public static Pecas peca;
         public static int linhaInicial;
         public static int linhaFinal;
         public static int colunaInicial;
@@ -25,6 +26,7 @@ namespace jogoDeXadrez.Entities.Xadrez
 
         public Tabuleiro()
         {
+            
             vezJogador = "Brancas";
             criaTabuleiro();
 
@@ -96,7 +98,7 @@ namespace jogoDeXadrez.Entities.Xadrez
 
         public void exibirTabuleiro()
         {
-            Console.Clear();
+           //Console.Clear();
             Console.Write("\n  ");
             for (int i = 0; i < 8; i++)
             {
@@ -188,10 +190,6 @@ namespace jogoDeXadrez.Entities.Xadrez
             posicaoOrigem = Console.ReadLine();
             colunaInicial = Array.IndexOf(LetrasColunas, Convert.ToString(posicaoOrigem[0]));
             linhaInicial = Array.IndexOf(NumerosLinhas, Convert.ToString(posicaoOrigem[1]));
-            //Console.WriteLine(colunaInicial);
-            //Console.WriteLine(linhaInicial);
-            //Console.WriteLine(tabuleiroX[linhaInicial,colunaInicial].LetrasPecas);
-            
         }
         public static void pegaPosicaoDestino()
         {
@@ -204,7 +202,6 @@ namespace jogoDeXadrez.Entities.Xadrez
             {
                 Console.WriteLine($"Vez do jogador {jogadorBlack} Pretas:");
             }
-
             
             Console.WriteLine("Digite a posição destino: ex a1: ");
             posicaoDestino = Console.ReadLine();
@@ -212,13 +209,21 @@ namespace jogoDeXadrez.Entities.Xadrez
             colunaFinal = Array.IndexOf(LetrasColunas, Convert.ToString(posicaoDestino[0]));
             linhaFinal = Array.IndexOf(NumerosLinhas, Convert.ToString(posicaoDestino[1]));
 
+            
+            //peca.Linha = linhaFinal;
+            //peca.Coluna = colunaFinal;
+
         }
 
         public static void moverPeca()
         {
-            tabuleiroX[linhaInicial, colunaInicial].qtdDeMovimentos++;
-            tabuleiroX[linhaFinal, colunaFinal] = tabuleiroX[linhaInicial, colunaInicial];
-            tabuleiroX[linhaInicial, colunaInicial] = new Pecas(linhaInicial,colunaFinal);           
+            peca.Linha = linhaFinal;
+            peca.Coluna= colunaFinal;
+            peca.qtdDeMovimentos++;
+
+            tabuleiroX[linhaInicial, colunaInicial] = new Pecas(linhaInicial,colunaFinal);
+            tabuleiroX[linhaFinal, colunaFinal] = peca;
+
         }
 
         public void GetJogadores()
@@ -238,20 +243,38 @@ namespace jogoDeXadrez.Entities.Xadrez
             vezJogador = vezJogador == "Brancas" ? "Pretas" : "Brancas";
         }
 
+
         public void ComecarPartida()
         {
             GetJogadores();
             while (!fimDePartida)
             {
-                
-                
+ 
                 exibirTabuleiro();
                 pegaPosicaoOrigem();
                 pegaPosicaoDestino();
-                moverPeca();
+                peca = Tabuleiro.tabuleiroX[linhaInicial, colunaInicial];
+                if (checaMovimento(ref peca, linhaFinal, colunaFinal) == false)
+                {
+                    Console.WriteLine("Posição inválida");
+                }
+                if (checaMovimento(ref peca, linhaFinal, colunaFinal) == true)
+                {
+                    moverPeca();
+                }   
                 exibirTabuleiro();
                 mudarVezJogador();
             }
+        }
+
+        public static bool checaMovimento(ref Pecas peca, int linhaFinal, int colunaFinal)
+        {
+           
+            if (peca.confereMovimento(linhaFinal, colunaFinal))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

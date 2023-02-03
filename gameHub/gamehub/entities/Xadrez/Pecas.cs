@@ -16,6 +16,12 @@ namespace jogoDeXadrez.Entities.Xadrez
         public Cor Cor;
         public LetrasPecas LetrasPecas;
 
+
+        public Pecas()
+        {
+
+        }
+
         public Pecas(int linha, int coluna)
         {
             Linha = linha;
@@ -30,7 +36,7 @@ namespace jogoDeXadrez.Entities.Xadrez
             return LetrasPecas.ToString();
         }
 
-        public virtual bool confereMovimento(int colunaFinal, int linhaFinal, Tabuleiro tab) 
+        public virtual bool confereMovimento(int colunaFinal, int linhaFinal) 
         {
             return false;
         }
