@@ -1,6 +1,7 @@
 ﻿using gamehub.entities.Enums;
 using jogoDeXadrez.Entities.Enums;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,6 @@ namespace jogoDeXadrez.Entities.Xadrez
         {
             Cor = cor;
             LetrasPecas = LetrasPecas.T;
-        }
-    }
+        }   
+    }   
 }
