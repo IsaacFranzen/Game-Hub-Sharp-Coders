@@ -12,6 +12,7 @@
 - [x] Persistência dos jogadores registrados em um Json
 - [x] Jogo da velha
 - [ ] Batalha naval
+- [ ] Xadrez
 
 As seguintes ferramentas foram usadas na construção do projeto:
 
